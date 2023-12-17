@@ -76,50 +76,7 @@ const goToLoginPage = () => {
 
 </script>
   
-<style scoped>
-  .appHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 48px;
-    border-bottom: 1px solid rgb(180, 180, 180);
-    background-color: rgb(206, 208, 211);
-  }
-  
-  .logo {
-    cursor: pointer;
-    width: 80px;
-    height: 60px;
-  }
-  
-  .left {
-    display: flex;
-    align-items: center;
-  }
-  
-  .right {
-    display: flex;
-    gap: 50px; 
-  }
-
-  .musicIcon{
-    cursor: pointer;
-  }
-  .musicIcon:hover{
-    color: blue;
-  }
-  .homeIcon{
-    cursor: pointer;
-  }
-  .homeIcon:hover{
-    color: blue;
-  }
-  .loginIcon{
-    cursor: pointer;
-  }
-  .loginIcon:hover{
-    color: blue;
-  }
-
+<style scoped lang="scss">
+@import "../styles/header.scss";
 </style>
   
