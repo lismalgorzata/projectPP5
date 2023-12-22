@@ -1,7 +1,7 @@
 <template>
     <div class="appHeader">
       <div class="left">
-        <img src="@/assets/logo.png" alt="Logo" class="logo" />
+        <img @click="goToMainPage" src="@/assets/logo.png" alt="Logo" class="logo" />
       </div>
       <div class="right">
         <div @click="goToMusicPage" class="musicIcon">
