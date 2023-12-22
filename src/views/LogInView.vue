@@ -109,6 +109,8 @@ export default {
     const registrationComplete = ref(false);
     const currentForm = ref('login'); // 'login' or 'registration'
 
+    const registeredUsers = ref([]);
+
     const toggleForm = () => {
       currentForm.value = currentForm.value === 'login' ? 'registration' : 'login';
     };
@@ -116,17 +118,29 @@ export default {
     const submitRegistration = () => {
       // Perform registration logic
       console.log('Registration data:', registrationForm);
-    // Use .value to update the ref value
+
+      // Push registration data to the registeredUsers array
+      registeredUsers.value.push({
+        fullName: registrationForm.fullName,
+        email: registrationForm.email,
+        password: registrationForm.password,
+        gender: registrationForm.gender,
+        whoareyou: { ...registrationForm.whoareyou },
+        bio: registrationForm.bio,
+      });
+
+      // Use .value to update the ref value
       registrationComplete.value = true;
     };
 
     const submitLogin = () => {
-      // Use registration data for login logic
-      if (
-        loginForm.email === registrationForm.email &&
-        loginForm.password === registrationForm.password
-      ) {
-        console.log('Login successful!');
+      // Check entered credentials against registered users
+      const user = registeredUsers.value.find(
+        (u) => u.email === loginForm.email && u.password === loginForm.password
+      );
+
+      if (user) {
+        console.log('Login successful!', user);
       } else {
         console.log('Login failed. Invalid credentials.');
       }
@@ -144,10 +158,9 @@ export default {
       registrationComplete.value = false;
     };
 
-    return { registrationForm, loginForm, registrationComplete, currentForm, toggleForm, submitRegistration, submitLogin, resetForm };
+    return { registrationForm, loginForm, registrationComplete, currentForm, toggleForm, submitRegistration, submitLogin, resetForm, registeredUsers };
   },
 };
-
 </script>
 
 <style lang="scss" scoped>
