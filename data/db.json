@@ -1,0 +1,5 @@
+{
+    "audio_files": [
+        {"id": "" ,"name": "name", "author": "author", "date": "date", "genre": "genre", "stars": 5, "favourite": true, "url": "url(cos do pobrania?)", "color": "color"}
+    ]
+}
