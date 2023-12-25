@@ -1,5 +1,37 @@
 {
-    "audio_files": [
-        {"id": "" ,"name": "name", "author": "author", "date": "date", "genre": "genre", "stars": 5, "favourite": true, "url": "url(cos do pobrania?)", "color": "color"}
-    ]
+  "audio_files": [
+    {
+      "id": "",
+      "name": "name",
+      "author": "author",
+      "date": "date",
+      "genre": "genre",
+      "stars": 5,
+      "favourite": true,
+      "url": "url(cos do pobrania?)",
+      "color": "color"
+    },
+    {
+      "name": "test",
+      "author": "test",
+      "date": "2023-12-14",
+      "genre": "poop",
+      "stars": -2,
+      "favourite": false,
+      "url": "https://www.test.pl",
+      "color": "#000000",
+      "id": "iONeOSj"
+    },
+    {
+      "name": "filip",
+      "author": "Kędzior",
+      "date": "2001-09-07",
+      "genre": "jest najlepszym",
+      "stars": 100000000000000,
+      "favourite": true,
+      "url": "https://programista.na.swiecie",
+      "color": "#ffde66",
+      "id": "GHnF7Y3"
+    }
+  ]
 }
