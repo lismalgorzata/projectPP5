@@ -1,48 +1,54 @@
 <template>
-  <div class="library-page">
-    <div class="musicLibrary">
-      <h2>Music View Library Page</h2>
-      <div v-for="file in audio_files" :key="file.id">
-        <h2>{{ file.name +" "+ file.author }}</h2>
+  <div>
+    <button @click="togglePage">
+      {{ currentPage === 'library' ? 'Add new audio' : 'See the library' }}
+    </button>
+
+    <div class="library-page">
+      <div class="musicLibrary" v-if="currentPage === 'library'">
+        <h2>Music View Library Page</h2>
+        <div v-for="file in audio_files" :key="file.id">
+          <h2>{{ file.name + ' ' + file.author }}</h2>
+        </div>
       </div>
-    </div>
 
-    <div class="add-page">
-      <h2>Add Song</h2>
+      <div class="addToLibrary" v-if="currentPage === 'add'">
 
-      <form @submit.prevent="submitAudioForm">
-        <label for="name">Name: </label>
-        <input type="text" v-model="formData.name" required>
+        <h2>Add Song</h2>
 
-        <label for="author">Author:</label>
-        <input type="text" v-model="formData.author" required>
+        <form @submit.prevent="submitAudioForm">
+          <label for="name">Name: </label>
+          <input type="text" v-model="formData.name" required>
 
-        <label for="date">Date:</label>
-        <input type="date" v-model="formData.date" required>
+          <label for="author">Author:</label>
+          <input type="text" v-model="formData.author" required>
 
-        <label for="genre">Genre:</label>
-        <input type="text" v-model="formData.genre" required>
+          <label for="date">Date:</label>
+          <input type="date" v-model="formData.date" required>
 
-        <label for="stars">Stars:</label>
-        <input type="number" v-model="formData.stars" required>
+          <label for="genre">Genre:</label>
+          <input type="text" v-model="formData.genre" required>
 
-        <label for="favourite">Favourite:</label>
-        <input type="checkbox" v-model="formData.favourite">
+          <label for="stars">Stars:</label>
+          <input type="number" v-model="formData.stars" required>
 
-        <label for="url">URL:</label>
-        <input type="url" v-model="formData.url" required>
+          <label for="favourite">Favourite:</label>
+          <input type="checkbox" v-model="formData.favourite">
 
-        <label for="color">Color:</label>
-        <input type="color" v-model="formData.color" required>
+          <label for="url">URL:</label>
+          <input type="url" v-model="formData.url" required>
 
-        <button type="submit">Submit</button>
-      </form>
+          <label for="color">Color:</label>
+          <input type="color" v-model="formData.color" required>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// Import Axios at the top
 import axios from 'axios';
 
 export default {
@@ -58,7 +64,8 @@ export default {
         favourite: false,
         url: '',
         color: '#000000'
-      }
+      },
+      currentPage: 'library'
     };
   },
   mounted() {
@@ -66,26 +73,19 @@ export default {
   },
   methods: {
     fetchAudioFiles() {
-      fetch('http://localhost:3000/audio_files')
-        .then(res => res.json())
-        .then(data => (this.audio_files = data))
+      axios.get('http://localhost:3000/audio_files')
+        .then(res => {
+          this.audio_files = res.data;
+        })
         .catch(err => console.log(err.message));
     },
     submitAudioForm() {
-      // Handle form submission logic here
-      console.log('Form submitted:', this.formData);
-
-      // Assuming you want to add the new audio file to the list
-      // You can adjust this part based on your server/API logic
       axios.post('http://localhost:3000/audio_files', this.formData)
         .then(res => {
-          console.log(res);
-          // Use the data returned by the server to update UI or perform actions
           this.audio_files.push(res.data);
         })
         .catch(err => console.log(err));
 
-      // Reset the form data for the next entry
       this.formData = {
         name: '',
         author: '',
@@ -97,8 +97,11 @@ export default {
         color: '#000000'
       };
 
-      // Fetch audio files after successful submission
+      this.togglePage(); // Fixed: Call togglePage method
       this.fetchAudioFiles();
+    },
+    togglePage() {
+      this.currentPage = this.currentPage === 'library' ? 'add' : 'library';
     }
   }
 };

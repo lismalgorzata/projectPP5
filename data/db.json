@@ -32,6 +32,17 @@
       "url": "https://programista.na.swiecie",
       "color": "#ffde66",
       "id": "GHnF7Y3"
+    },
+    {
+      "name": "Małgorzata",
+      "author": "Lis",
+      "date": "2023-12-15",
+      "genre": "cute",
+      "stars": 1e+53,
+      "favourite": true,
+      "url": "https://kocham.gosie.bardzo",
+      "color": "#ff00ea",
+      "id": "QKpdF_L"
     }
   ]
 }
