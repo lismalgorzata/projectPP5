@@ -54,13 +54,18 @@
           </svg>
         </div>
       </div>
+      <p v-if="currentUser">Welcome: {{ currentUser.fullName }}</p>
     </div>
 </template>
   
 <script setup>
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
 const router = useRouter();
+const store = useStore();
+
+const currentUser = store.getters.getCurrentUser;
 
 const goToMainPage = () => {
   router.push({ name: 'home' });

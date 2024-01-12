@@ -77,6 +77,18 @@
         "creator": true
       },
       "bio": "testing"
+    },
+    {
+      "id": "8a88",
+      "fullName": "123",
+      "email": "123@123.123",
+      "password": "123",
+      "gender": "other",
+      "whoareyou": {
+        "user": false,
+        "creator": true
+      },
+      "bio": "123"
     }
   ]
 }

@@ -85,9 +85,12 @@
 <script>
 import { reactive, ref } from 'vue';
 import axios from 'axios';
+import { useStore } from 'vuex';
 
 export default {
   setup() {
+    const store = useStore();
+
     const registrationForm = reactive({
       fullName: '',
       email: '',
@@ -146,6 +149,8 @@ export default {
 
         if (user) {
           console.log('Login successful!', user);
+          store.commit('setCurrentUser', user)
+          store.dispatch('login', user);
         } else {
           console.log('Login failed. Invalid credentials.');
         }
