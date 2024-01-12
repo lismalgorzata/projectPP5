@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { reactive, ref } from 'vue';
+import { reactive, ref , onMounted } from 'vue';
 import axios from 'axios';
 import { useStore } from 'vuex';
 
@@ -139,6 +139,8 @@ export default {
       }
     };
 
+    const isLoggedIn = ref(false); 
+
     const submitLogin = () => {
       // Use Axios to fetch users from the server
       axios.get('http://localhost:3000/users').then((response) => {
@@ -151,6 +153,8 @@ export default {
           console.log('Login successful!', user);
           store.commit('setCurrentUser', user)
           store.dispatch('login', user);
+          isLoggedIn.value = true;
+          emit('userLoggedIn');
         } else {
           console.log('Login failed. Invalid credentials.');
         }
@@ -158,6 +162,13 @@ export default {
         console.error('Error during login:', error);
       });
     };
+
+    onMounted(() => {
+    if (isLoggedIn.value) {
+      // Wyslij zdarzenie, gdy użytkownik jest zalogowany
+      emit('userLoggedIn');
+    }
+  });
 
     const resetForm = () => {
       // Reset registration form
@@ -176,6 +187,7 @@ export default {
       loginForm,
       registrationComplete,
       currentForm,
+      isLoggedIn,
       toggleForm,
       submitRegistration,
       submitLogin,

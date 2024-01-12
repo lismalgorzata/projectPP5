@@ -59,13 +59,14 @@
 </template>
   
 <script setup>
+import { ref, watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
 const router = useRouter();
 const store = useStore();
 
-const currentUser = store.getters.getCurrentUser;
+const currentUser = ref(store.getters.getCurrentUser);
 
 const goToMainPage = () => {
   router.push({ name: 'home' });
@@ -78,6 +79,17 @@ const goToMusicPage = () => {
 const goToLoginPage = () => {
   router.push({ name: 'login' });
 };
+
+// Użyj watch do monitorowania zmiany currentUser
+watch(() => store.getters.getCurrentUser, (newUser) => {
+  currentUser.value = newUser;
+});
+
+// Zamień onUpdated na onMounted
+onMounted(() => {
+  console.log('Component is mounted');
+  // Dodaj kod aktualizujący nagłówek, np. ustawiający nowy stan użytkownika
+});
 
 </script>
   
