@@ -86,6 +86,7 @@
 
 <script>
 import { reactive, ref } from 'vue';
+import axios from 'axios';
 
 export default {
   setup() {
@@ -115,35 +116,44 @@ export default {
       currentForm.value = currentForm.value === 'login' ? 'registration' : 'login';
     };
 
-    const submitRegistration = () => {
-      // Perform registration logic
-      console.log('Registration data:', registrationForm);
+    const submitRegistration = async () => {
+      try {
+        // Perform registration logic
+        console.log('Registration data:', registrationForm);
 
-      // Push registration data to the registeredUsers array
-      registeredUsers.value.push({
-        fullName: registrationForm.fullName,
-        email: registrationForm.email,
-        password: registrationForm.password,
-        gender: registrationForm.gender,
-        whoareyou: { ...registrationForm.whoareyou },
-        bio: registrationForm.bio,
-      });
+        // Use Axios to post registration data to the server
+        await axios.post('http://localhost:3000/users', {
+          fullName: registrationForm.fullName,
+          email: registrationForm.email,
+          password: registrationForm.password,
+          gender: registrationForm.gender,
+          whoareyou: { ...registrationForm.whoareyou },
+          bio: registrationForm.bio,
+        });
 
-      // Use .value to update the ref value
-      registrationComplete.value = true;
+        // Use .value to update the ref value
+        registrationComplete.value = true;
+      } catch (error) {
+        console.error('Error during registration:', error);
+      }
     };
 
     const submitLogin = () => {
-      // Check entered credentials against registered users
-      const user = registeredUsers.value.find(
-        (u) => u.email === loginForm.email && u.password === loginForm.password
-      );
+      // Use Axios to fetch users from the server
+      axios.get('http://localhost:3000/users').then((response) => {
+        const users = response.data;
+        const user = users.find(
+          (u) => u.email === loginForm.email && u.password === loginForm.password
+        );
 
-      if (user) {
-        console.log('Login successful!', user);
-      } else {
-        console.log('Login failed. Invalid credentials.');
-      }
+        if (user) {
+          console.log('Login successful!', user);
+        } else {
+          console.log('Login failed. Invalid credentials.');
+        }
+      }).catch((error) => {
+        console.error('Error during login:', error);
+      });
     };
 
     const resetForm = () => {
@@ -158,9 +168,20 @@ export default {
       registrationComplete.value = false;
     };
 
-    return { registrationForm, loginForm, registrationComplete, currentForm, toggleForm, submitRegistration, submitLogin, resetForm, registeredUsers };
+    return {
+      registrationForm,
+      loginForm,
+      registrationComplete,
+      currentForm,
+      toggleForm,
+      submitRegistration,
+      submitLogin,
+      resetForm,
+      registeredUsers,
+    };
   },
 };
+
 </script>
 
 <style lang="scss" scoped>

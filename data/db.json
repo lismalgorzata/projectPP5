@@ -55,5 +55,28 @@
       "url": "https://lobelobe.pl",
       "color": "#ff00ff"
     }
+  ],
+  "users": [
+    {
+      "fullName": "admin",
+      "email": "admin@admin.pl",
+      "password": "admin",
+      "gender": "",
+      "whoareyou": "",
+      "bio": "admin",
+      "id": "6c4c"
+    },
+    {
+      "id": "dfe8",
+      "fullName": "test",
+      "email": "test@test.test",
+      "password": "test",
+      "gender": "other",
+      "whoareyou": {
+        "user": true,
+        "creator": true
+      },
+      "bio": "testing"
+    }
   ]
 }
