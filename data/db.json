@@ -40,9 +40,20 @@
       "genre": "cute",
       "stars": 1e+53,
       "favourite": true,
-      "url": "https://kocham.gosie.bardzo",
+      "url": "xd",
       "color": "#ff00ea",
       "id": "QKpdF_L"
+    },
+    {
+      "id": "3961",
+      "name": "lobelobe",
+      "author": "ML",
+      "date": "2024-01-12",
+      "genre": "lofi",
+      "stars": 100,
+      "favourite": false,
+      "url": "https://lobelobe.pl",
+      "color": "#ff00ff"
     }
   ]
 }
