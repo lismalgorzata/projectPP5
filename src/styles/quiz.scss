@@ -1,0 +1,64 @@
+h1 {
+text-align: center;
+}
+
+h2 {
+margin-top: 20px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    }
+
+button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #409047;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    
+    &:hover {
+      background-color: rgb(13, 17, 134);
+    }
+}
+
+.completion-message {
+text-align: center;
+margin-top: 20px;
+}
+
+.restart-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #409047;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    
+    &:hover {
+      background-color: rgb(134, 13, 13);
+    }
+}
+
+.inline-checkbox {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.inline-radio {
+display: inline-block;
+margin-right: 10px; 
+}
+
