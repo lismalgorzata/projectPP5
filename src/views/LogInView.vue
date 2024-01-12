@@ -77,11 +77,9 @@
       
     </form>
 
-    
-
   </div>
 
-  <button @click="toggleForm">{{ currentForm === 'login' ? 'Switch to Registration' : 'Switch to Login' }}</button>
+  <button class="toggleBtn" @click="toggleForm">{{ currentForm === 'login' ? 'Switch to Registration' : 'Switch to Login' }}</button>
 </template>
 
 <script>
@@ -163,64 +161,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-  .container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .form {
-    flex: 0 0 45%;
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
-    .form-group {
-      margin-bottom: 15px;
-      
-      label {
-        display: block;
-        margin-bottom: 5px;
-      }
-      
-      input,
-      select,
-      textarea {
-        width: 100%;
-        padding: 8px;
-        box-sizing: border-box;
-      }
-      
-      .inline-checkbox-group {
-        display: flex;
-        gap: 10px;
-      }
-
-      .inline-checkbox {
-        display: flex;
-        align-items: center;
-
-        input {
-          margin-right: 5px;
-          }
-      }
-    }
-  .registration-data {
-    flex: 0 0 45%;
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ced4da;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .login-form {
-    background-color: #ffffff;
-  }
-}
+<style scoped lang="scss">
+@import "../styles/loginview.scss";
 </style>

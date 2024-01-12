@@ -1,12 +1,13 @@
 <template>
   <div>
+    <h1>Music Library</h1>
+
     <button @click="togglePage">
       {{ currentPage === 'library' ? 'Add new audio' : 'See the library' }}
     </button>
 
     <div class="library-page">
       <div class="musicLibrary" v-if="currentPage === 'library'">
-        <h2>Music View Library Page</h2>
         <div v-for="file in audio_files" :key="file.id">
           <h2>{{ file.name + ' ' + file.author }}</h2>
         </div>
@@ -30,10 +31,12 @@
           <input type="text" v-model="formData.genre" required>
 
           <label for="stars">Stars:</label>
-          <input type="number" v-model="formData.stars" required>
+          <input type="number" v-model="formData.stars" min="0" max="10" required>
 
-          <label for="favourite">Favourite:</label>
-          <input type="checkbox" v-model="formData.favourite">
+          <div class="inline-checkbox">
+            <input type="checkbox" v-model="formData.favourite">
+            <label for="favourite">Favourite</label>
+          </div>
 
           <label for="url">URL:</label>
           <input type="url" v-model="formData.url" required>
@@ -106,3 +109,7 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+@import "../styles/musicview.scss";
+</style>
