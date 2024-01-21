@@ -3,12 +3,13 @@ services:
   vueapp:
     build:
       context: .
+      dockerfile: Dockerfile  # Name of your Vue.js app Dockerfile
     ports:
-      - "8080:80"
+      - "8080:8080"  # Map container's 8080 to host's 8080
   apache:
     image: httpd:2.4
     ports:
-      - "80:80"
+      - "80:80"  # Map container's port 80 to host's port 80
     volumes:
       - ./apache-config/httpd.conf:/usr/local/apache2/conf/httpd.conf
       - ./apache-config/your-site.conf:/usr/local/apache2/conf/extra/your-site.conf

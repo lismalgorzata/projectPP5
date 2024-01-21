@@ -1,5 +1,8 @@
-# Use an official Node runtime as a parent image
-FROM node:14 as builder
+# Stage 1: Build the Vue.js app
+FROM node:lts-alpine AS builder
+
+# Install global dependencies with specific versions
+RUN npm install -g http-server @vue/cli@latest axios@latest json-server@latest vuex@latest vue-router@latest
 
 # Set the working directory to /app
 WORKDIR /app
@@ -9,11 +12,6 @@ COPY package*.json ./
 
 # Install app dependencies
 RUN npm install
-RUN npm install -g @vue/cli
-RUN npm install -g axios
-RUN npm install -g json-server
-RUN npm install -g vuex
-RUN npm install -g vue-router
 
 # Copy the rest of the application code to the working directory
 COPY . .
@@ -21,16 +19,22 @@ COPY . .
 # Build the Vue.js app for production
 RUN npm run build
 
-# Create a smaller production image
-FROM node:14-alpine
+# Stage 2: Create a smaller production image
+FROM node:lts-alpine
 
 # Set the working directory to /app
 WORKDIR /app
 
+# Create the dist directory
+RUN mkdir dist
+
 # Copy only necessary files from the builder image
 COPY --from=builder /app/dist /app/dist
-COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/package*.json /app/
 COPY --from=builder /app/data /app/data
+
+RUN ls -l /app
+RUN ls -l /app/dist
 
 # Add global npm bin directory to the PATH during runtime
 ENV PATH /app/node_modules/.bin:$PATH
