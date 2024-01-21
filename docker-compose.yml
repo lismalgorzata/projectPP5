@@ -1,0 +1,16 @@
+version: '3'
+services:
+  vueapp:
+    build:
+      context: .
+    ports:
+      - "8080:80"
+  apache:
+    image: httpd:2.4
+    ports:
+      - "80:80"
+    volumes:
+      - ./apache-config/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./apache-config/your-site.conf:/usr/local/apache2/conf/extra/your-site.conf
+    depends_on:
+      - vueapp
